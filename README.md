@@ -1,4 +1,6 @@
-# quantron-test
+# start:
+- npm install
+- npm run start
 
 # curl commands examples
 ## setHeroStats:
