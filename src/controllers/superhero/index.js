@@ -38,9 +38,18 @@ const getHeroImageFilePath = async () => {
   return path.resolve(dataFolderPath, imageFileName);
 };
 
-const clearPreviousHeroImage = () => {
+const clearPreviousHeroImage = async imageFileName => {
   const fileNames = await fs.promises.readdir(dataFolderPath);
-  const imageFileName = fileNames.find(fileName => fileName.startsWith('image'));
+
+  fileNames.forEach(fileName => {
+    if (fileName !== imageFileName && fileName.startsWith('image')) {
+      const filePath = path.resolve(dataFolderPath, fileName);
+
+      fs.unlink(filePath, error => {
+        if (error) console.error(error);
+      });
+    }
+  });
 };
 
 module.exports = {

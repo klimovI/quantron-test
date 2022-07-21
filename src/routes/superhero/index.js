@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const {
+  clearPreviousHeroImage,
   setHeroStats,
   getHeroStats,
-  setHeroImage,
   getHeroImageFilePath,
 } = require('../../controllers/superhero');
 const heroStatsValidator = require('./heroStatsValidator');
@@ -39,7 +39,8 @@ superheroRouter.post('/uploadHeroImage', (req, res) => {
     } else if (!req.file) {
       res.status(400).json({ error: 'A file was not sent' });
     } else {
-      console.log(req.file);
+      clearPreviousHeroImage(req.file.filename);
+
       res.json({
         message: 'Image is uploaded successfully',
       });
