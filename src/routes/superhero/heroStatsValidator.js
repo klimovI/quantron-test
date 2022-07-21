@@ -1,6 +1,6 @@
 const validateInteger = (number, fieldName, errors) => {
   if (number < 0 || !Number.isInteger(number)) {
-    errors.push(`"${fieldName}" must be a positive integer`);
+    errors.push(`${fieldName} must be a positive integer`);
   }
 };
 
@@ -13,7 +13,7 @@ const validateHeroStats = stats => {
   const errors = [];
 
   if (typeof name !== 'string') {
-    errors.push('"name" must be a string');
+    errors.push('name must be a string');
   }
 
   validateInteger(strength, 'strength', errors);
@@ -35,7 +35,7 @@ const heroStatsValidator = (req, res, next) => {
     validateHeroStats(req.body);
     next();
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };
 
