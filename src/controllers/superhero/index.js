@@ -4,10 +4,12 @@ const path = require('path');
 const dataFolderPath = path.resolve(__dirname, '__data');
 const statsFilePath = path.resolve(dataFolderPath, 'stats.json');
 
+// a folder is used to store hero data as there is no database
 if (!fs.existsSync(dataFolderPath)) {
   fs.mkdirSync(dataFolderPath);
 }
 
+// tores hero stats as a json file
 const setHeroStats = async stats => {
   try {
     await fs.promises.writeFile(statsFilePath, JSON.stringify(stats));
@@ -17,6 +19,7 @@ const setHeroStats = async stats => {
   }
 };
 
+// reads hero stats from a json file
 const getHeroStats = async () => {
   try {
     const statsJSON = await fs.promises.readFile(statsFilePath);
@@ -27,6 +30,7 @@ const getHeroStats = async () => {
   }
 };
 
+// finds a hero image file path
 const getHeroImageFilePath = async () => {
   const fileNames = await fs.promises.readdir(dataFolderPath);
   const imageFileName = fileNames.find(fileName => fileName.startsWith('image'));
@@ -38,11 +42,12 @@ const getHeroImageFilePath = async () => {
   return path.resolve(dataFolderPath, imageFileName);
 };
 
-const clearPreviousHeroImage = async imageFileName => {
+// removes a previous hero image file (if exists), keeps 'currentFileName'
+const clearPreviousHeroImage = async currentFileName => {
   const fileNames = await fs.promises.readdir(dataFolderPath);
 
   fileNames.forEach(fileName => {
-    if (fileName !== imageFileName && fileName.startsWith('image')) {
+    if (fileName !== currentFileName && fileName.startsWith('image')) {
       const filePath = path.resolve(dataFolderPath, fileName);
 
       fs.unlink(filePath, error => {

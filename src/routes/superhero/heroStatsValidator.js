@@ -30,6 +30,7 @@ const validateHeroStats = stats => {
   }
 };
 
+// middleware, checks that hero stats object (comes in req.body) is valid
 const heroStatsValidator = (req, res, next) => {
   try {
     validateHeroStats(req.body);
