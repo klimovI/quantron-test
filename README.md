@@ -1,16 +1,16 @@
-# start:
+# start
 - npm install
 - npm run start
 
 # curl commands examples
-## setHeroStats:
+- setHeroStats
 `curl -X POST http://localhost:3000/superhero/setHeroStats -H 'Content-Type: application/json' -d '{"name":"me","strength":0,"dexterity":0,"intellect":1,"isInvincible":false}'`
 
-## getHeroStats:
+- getHeroStats
 `curl http://localhost:3000/superhero/getHeroStats`
 
-## uploadHeroImage:
+- uploadHeroImage
 `curl -F "image=@<path_to_file>" http://localhost:3000/superhero/uploadHeroImage`
 
-## getHeroImage:
+- getHeroImage
 http://localhost:3000/superhero/getHeroImage
